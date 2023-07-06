@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kenya Universities Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <style>
+        #map {
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([-1.286389, 36.817223], 7);
+
+        // Add the base tile layer (you can choose a different tile layer if desired)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Define the universities data
+        var universities = [
+            {
+                name: "University of Nairobi",
+                location: [-1.266389, 36.802223],
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Universityofnairobi.jpg/220px-Universityofnairobi.jpg.jpg"
+            },
+            {
+                name: "Kenyatta University",
+                location: [-1.1498, 36.9643],
+                image: "https://www.pv-magazine.com/wp-content/uploads/2017/12/Kenyatta_University_Entrance_Nairobi_Image_Wikipedia_-1200x800.jpg.jpg"
+            },
+            {
+                name: "Laikipia University",
+                location: [0.191301, 36.699564],
+                image: "https://www.standardmedia.co.ke/rift-valley/article/2001424958/mystery-of-laikipia-university-student-killed-in-her-hostel.jpg"
+            },
+            {
+                name: "Technical University of Mombasa",
+                location: [-4.0575, 39.6628],
+                image: "https://netstorage-tuko.akamaized.net/images/0fgjhs42fa4k96v96.jpg?imwidth=900.jpg"
+            },
+            {
+                name: "Egerton University",
+                location: [-0.3696, 36.9622],
+                image: "https://www.egerton.ac.ke/images/egerton_university/banners_ads/egerton_gate2hd.jpg.jpg"
+            }
+        ];
+
+        // Add markers and popups for each university
+        universities.forEach(function (university) {
+            var marker = L.marker(university.location).addTo(map);
+
+            // Create the custom popup content with the university name and image
+            var popupContent = `
+                <h3>${university.name}</h3>
+                <img src="${university.image}" width="200" height="150" alt="${university.name} Image">
+            `;
+
+            marker.bindPopup(popupContent);
+        });
+    </script>
+</body>
+</html>
